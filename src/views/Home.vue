@@ -1,10 +1,198 @@
 <template>
-  <div class="home"></div>
+  <div class="home">
+    <!-- 页面加载 -->
+    <IconLoading v-if="ready">
+      <h2 class="loading-text">Loading...</h2>
+    </IconLoading>
+    <!-- 页面内容-->
+    <Container v-else :options="options">
+      <header class="header">
+      </header>
+      <div class="separator">
+      </div>
+      <main class="main">
+        <div class="left">
+          <div class="left1"></div>
+          <div class="left2"></div>
+          <div class="left3"></div>
+          <div class="left4"></div>
+          <div class="left5"></div>
+          <div class="left6"></div>
+        </div>
+        <div class="right">
+          <div class="right-top1"></div>
+          <div class="right-top2"></div>
+          <div class="right-bottom">
+            <div class="right-left">
+              <div class="right-left1"></div>
+              <div class="right-left2"></div>
+              <div class="right-left3"></div>
+              <div class="right-left4"></div>
+            </div>
+            <div class="right-right">
+              <div class="right-right1"></div>
+              <div class="right-right2"></div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </Container>
+  </div>
 </template>
 
 <script>
+import { reactive } from 'vue'
 
 export default {
-  name: 'Home'
+  name: 'Home',
+  setup () {
+    const options = reactive({
+      width: 3840,
+      height: 2160
+    })
+    return {
+      options
+    }
+  }
 }
 </script>
+
+<style lang="scss" scoped>
+.home {
+  height: 100%;
+  width: 100%;
+  background: rgb(29, 29, 29);
+  color: #fff;
+  font-size: 48px;
+
+  #container {
+    display: flex;
+    flex-direction: column;
+
+    .header {
+      height: 167px;
+    }
+
+    .separator {
+      height: 10px;
+      width: 100%;
+      background: #5c5859;
+    }
+
+    .main {
+      flex: 1;
+      display: flex;
+
+      .left {
+        flex: 0 0 860px;
+        display: flex;
+        flex-direction: column;
+        width: 860px;
+        height: 100%;
+        margin: 0 10px;
+        box-sizing: border-box;
+        background: #3c3d40;;
+
+        .left1, .left2, .left3, .left4, .left5, .left6 {
+          margin-bottom: 20px;
+        }
+
+        .left1 {
+          height: 300px;
+        }
+
+        .left2 {
+          height: 320px;
+        }
+
+        .left3 {
+          height: 280px;
+        }
+
+        .left4 {
+          height: 230px;
+        }
+
+        .left5 {
+          height: 360px;
+        }
+
+        .left6 {
+          height: 360px;
+        }
+      }
+
+      .right {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        margin: 0 10px;
+        max-width: 2960px;
+        overflow: hidden;
+
+        .right-top1 {
+          height: 206px;
+          margin-bottom: 20px;
+        }
+
+        .right-top2 {
+          height: 48px;
+          margin-bottom: 20px;
+        }
+
+        .right-bottom {
+          flex: 1;
+          display: flex;
+
+          .right-left {
+            display: flex;
+            flex-direction: column;
+            width: 1917px;
+
+            .right-left1 {
+              height: 999px;
+            }
+
+            .right-left2 {
+              height: 80px;
+              padding-top: 20px;
+              box-sizing: border-box;
+            }
+
+            .right-left3 {
+              height: 350px;
+              margin-top: 10px;
+            }
+
+            .right-left4 {
+              height: 220px;
+              margin-top: 10px;
+            }
+          }
+
+          .right-right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            margin-left: 10px;
+
+            .right-right1 {
+              width: 100%;
+              height: 999px;
+              padding-right: 10px;
+              box-sizing: border-box;
+            }
+
+            .right-right2 {
+              width: 100%;
+              height: 650px;
+              margin-top: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</style>
