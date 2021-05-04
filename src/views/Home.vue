@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <!-- 页面加载 -->
-    <IconLoading v-if="ready">
+    <IconLoading v-if="!ready">
       <h2 class="loading-text">Loading...</h2>
     </IconLoading>
     <!-- 页面内容-->
@@ -41,17 +41,26 @@
 </template>
 
 <script>
-import { reactive } from 'vue'
+import { reactive, getCurrentInstance } from 'vue'
+import screenData from '@/views/screenData'
 
 export default {
   name: 'Home',
   setup () {
+    // 页面配置
     const options = reactive({
       width: 3840,
       height: 2160
     })
+    // 页面数据
+    const context = getCurrentInstance().ctx
+    const { ready, mapData, userData } = screenData(context, { once: true })
+
     return {
-      options
+      options,
+      ready,
+      mapData,
+      userData
     }
   }
 }
