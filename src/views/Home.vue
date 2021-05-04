@@ -7,6 +7,7 @@
     <!-- 页面内容-->
     <Container v-else :options="options">
       <header class="header">
+        <TopHeader/>
       </header>
       <div class="separator">
       </div>
@@ -43,16 +44,18 @@
 <script>
 import { reactive, getCurrentInstance } from 'vue'
 import screenData from '@/views/screenData'
+import TopHeader from '@/components/TopHeader'
 
 export default {
   name: 'Home',
+  components: { TopHeader },
   setup () {
     // 页面配置
     const options = reactive({
       width: 3840,
       height: 2160
     })
-    // 页面数据
+    // 页面数据 - 业务逻辑和组件代码分离
     const context = getCurrentInstance().ctx
     const { ready, mapData, userData } = screenData(context, { once: true })
 
