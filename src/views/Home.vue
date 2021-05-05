@@ -13,12 +13,35 @@
       </div>
       <main class="main">
         <div class="left">
-          <div class="left1"></div>
-          <div class="left2"></div>
-          <div class="left3"></div>
-          <div class="left4"></div>
-          <div class="left5"></div>
-          <div class="left6"></div>
+          <div class="left1">
+            <TotalUser
+              :today-user="userData.userToday"
+              :growth-last-day="parseFloat(userData.userGrowthLastDay) || 0"
+              :growth-last-month="parseFloat(userData.userGrowthLastMonth) || 0"
+            />
+          </div>
+          <div class="left2">
+            <AverageAge
+              :data="ageData"
+              :avg-age="parseFloat(userData.averageAge) || 0"
+            />
+          </div>
+          <div class="left3">
+            <TotalDevice
+              :data="deviceData"
+            />
+          </div>
+          <div class="left4">
+            <TotalGender
+              :data="userData.gender"
+            />
+          </div>
+          <div class="left5">
+            <LineChart :data="userData.rider"/>
+          </div>
+          <div class="left6">
+            <BarChart :data="userData.category"/>
+          </div>
         </div>
         <div class="right">
           <div class="right-top1"></div>
@@ -45,10 +68,16 @@
 import { reactive, getCurrentInstance } from 'vue'
 import screenData from '@/views/screenData'
 import TopHeader from '@/components/TopHeader'
+import TotalUser from '@/components/TotalUser'
+import AverageAge from '@/components/AverageAge'
+import TotalDevice from '@/components/TotalDevice'
+import TotalGender from '@/components/TotalGender'
+import LineChart from '@/components/LineChart'
+import BarChart from '@/components/BarChart'
 
 export default {
   name: 'Home',
-  components: { TopHeader },
+  components: { TopHeader, TotalUser, AverageAge, TotalDevice, TotalGender, LineChart, BarChart },
   setup () {
     // 页面配置
     const options = reactive({
@@ -57,13 +86,15 @@ export default {
     })
     // 页面数据 - 业务逻辑和组件代码分离
     const context = getCurrentInstance().ctx
-    const { ready, mapData, userData } = screenData(context, { once: true })
+    const { ready, mapData, userData, ageData, deviceData } = screenData(context, { once: false })
 
     return {
       options,
       ready,
       mapData,
-      userData
+      userData,
+      ageData,
+      deviceData
     }
   }
 }

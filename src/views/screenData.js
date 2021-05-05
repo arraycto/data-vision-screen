@@ -5,6 +5,8 @@ export default function (context, { once }) {
   const ready = ref(false) // flag：数据请求是否完毕
   const mapData = ref({}) // 地图数据
   const userData = ref({}) // 其他数据
+  const ageData = ref([]) // 年龄数据
+  const deviceData = ref({})
   let task // 间隔请求数据任务
 
   onMounted(() => {
@@ -34,11 +36,35 @@ export default function (context, { once }) {
   // 获取数据并处理
   const getAllData = async () => {
     userData.value = await getUserData()
+    // 处理 ageData
+    userData.value && userData.value.age && userData.value.age.forEach((item, index) => {
+      if (ageData.value[index]) {
+        ageData.value[index] = {
+          startValue: ageData.value[index].value,
+          value: item.value,
+          axis: item.key
+        }
+        ageData.value = [...ageData.value]
+      } else {
+        ageData.value.push({
+          startValue: 0,
+          value: item.value,
+          axis: item.key
+        })
+      }
+    })
+    // 处理 deviceData
+    deviceData.value = {
+      totalDevices: userData.value.totalDevices,
+      devices: userData.value.devices
+    }
   }
 
   return {
     ready,
     mapData,
-    userData
+    userData,
+    ageData,
+    deviceData
   }
 }

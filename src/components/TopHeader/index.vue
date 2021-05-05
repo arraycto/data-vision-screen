@@ -23,8 +23,6 @@ export default {
   setup () {
     const { date, time } = useClock()
 
-    console.log(date, time)
-
     return {
       date,
       time
