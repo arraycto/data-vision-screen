@@ -47,11 +47,15 @@
           <div class="right-top1">
             <CenterHeader :data="userData"/>
           </div>
-          <div class="right-top2"></div>
+          <div class="right-top2">
+            <TransformCategory :data="category1" :handler="handler"/>
+          </div>
           <div class="right-bottom">
             <div class="right-left">
               <div class="right-left1"></div>
-              <div class="right-left2"></div>
+              <div class="right-left2">
+                <TransformCategory :data="category2" :handler="handler"/>
+              </div>
               <div class="right-left3"></div>
               <div class="right-left4"></div>
             </div>
@@ -77,10 +81,11 @@ import TotalGender from '@/components/TotalGender'
 import LineChart from '@/components/LineChart'
 import BarChart from '@/components/BarChart'
 import CenterHeader from '@/components/CenterHeader'
+import TransformCategory from '@/components/TransformCategory'
 
 export default {
   name: 'Home',
-  components: { TopHeader, TotalUser, AverageAge, TotalDevice, TotalGender, LineChart, BarChart, CenterHeader },
+  components: { TopHeader, TotalUser, AverageAge, TotalDevice, TotalGender, LineChart, BarChart, CenterHeader, TransformCategory },
   setup () {
     // 页面配置
     const options = reactive({
@@ -91,13 +96,60 @@ export default {
     const context = getCurrentInstance().ctx
     const { ready, mapData, userData, ageData, deviceData } = screenData(context, { once: false })
 
+    const category1 = [
+      {
+        name: 'ALL',
+        key: 'all'
+      }, {
+        name: '北京',
+        key: 'beijing'
+      }, {
+        name: '上海',
+        key: 'shanghai'
+      }, {
+        name: '深圳',
+        key: 'shenzhen'
+      }, {
+        name: '杭州',
+        key: 'hangzhou'
+      }, {
+        name: '南京',
+        key: 'nanjing'
+      }, {
+        name: '武汉',
+        key: 'wuhan'
+      }
+    ]
+    const category2 = [
+      {
+        name: '订单量',
+        key: 'order'
+      }, {
+        name: '销售额',
+        key: 'sale'
+      }, {
+        name: '用户数',
+        key: 'user'
+      }, {
+        name: '退单量',
+        key: 'return'
+      }
+    ]
+
+    const handler = (key) => {
+      // console.log('正在点击：', key)
+    }
+
     return {
       options,
       ready,
       mapData,
       userData,
       ageData,
-      deviceData
+      deviceData,
+      category1,
+      category2,
+      handler
     }
   }
 }
