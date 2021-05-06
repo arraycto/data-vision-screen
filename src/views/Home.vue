@@ -44,7 +44,9 @@
           </div>
         </div>
         <div class="right">
-          <div class="right-top1"></div>
+          <div class="right-top1">
+            <CenterHeader :data="userData"/>
+          </div>
           <div class="right-top2"></div>
           <div class="right-bottom">
             <div class="right-left">
@@ -74,10 +76,11 @@ import TotalDevice from '@/components/TotalDevice'
 import TotalGender from '@/components/TotalGender'
 import LineChart from '@/components/LineChart'
 import BarChart from '@/components/BarChart'
+import CenterHeader from '@/components/CenterHeader'
 
 export default {
   name: 'Home',
-  components: { TopHeader, TotalUser, AverageAge, TotalDevice, TotalGender, LineChart, BarChart },
+  components: { TopHeader, TotalUser, AverageAge, TotalDevice, TotalGender, LineChart, BarChart, CenterHeader },
   setup () {
     // 页面配置
     const options = reactive({
@@ -108,6 +111,10 @@ export default {
   color: #fff;
   font-size: 48px;
 
+  .loading-text{
+    font-size: 24px;
+  }
+
   #container {
     display: flex;
     flex-direction: column;
@@ -135,9 +142,10 @@ export default {
         margin: 0 10px;
         box-sizing: border-box;
         background: #3c3d40;;
+        justify-content: space-between;
 
         .left1, .left2, .left3, .left4, .left5, .left6 {
-          margin-bottom: 20px;
+          //margin-bottom: 20px;
         }
 
         .left1 {
