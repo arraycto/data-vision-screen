@@ -60,7 +60,9 @@
               <div class="right-left4"></div>
             </div>
             <div class="right-right">
-              <div class="right-right1"></div>
+              <div class="right-right1">
+                <PlanList :data="userData.areaSales"/>
+              </div>
               <div class="right-right2"></div>
             </div>
           </div>
@@ -82,10 +84,11 @@ import LineChart from '@/components/LineChart'
 import BarChart from '@/components/BarChart'
 import CenterHeader from '@/components/CenterHeader'
 import TransformCategory from '@/components/TransformCategory'
+import PlanList from '@/components/PlanList'
 
 export default {
   name: 'Home',
-  components: { TopHeader, TotalUser, AverageAge, TotalDevice, TotalGender, LineChart, BarChart, CenterHeader, TransformCategory },
+  components: { TopHeader, TotalUser, AverageAge, TotalDevice, TotalGender, LineChart, BarChart, CenterHeader, TransformCategory, PlanList },
   setup () {
     // 页面配置
     const options = reactive({
