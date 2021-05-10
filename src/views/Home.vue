@@ -52,7 +52,9 @@
           </div>
           <div class="right-bottom">
             <div class="right-left">
-              <div class="right-left1"></div>
+              <div class="right-left1">
+                <OrderMap :data="mapData"/>
+              </div>
               <div class="right-left2">
                 <TransformCategory :data="category2" :handler="handler"/>
               </div>
@@ -94,10 +96,11 @@ import PlanList from '@/components/PlanList'
 import ActivateUser from '@/components/ActivateUser'
 import RealtimeOrder from '@/components/RealtimeOrder'
 import ScheduleView from '@/components/ScheduleView'
+import OrderMap from '@/components/OrderMap'
 
 export default {
   name: 'Home',
-  components: { TopHeader, TotalUser, AverageAge, TotalDevice, TotalGender, LineChart, BarChart, CenterHeader, TransformCategory, PlanList, ActivateUser, RealtimeOrder, ScheduleView },
+  components: { TopHeader, TotalUser, AverageAge, TotalDevice, TotalGender, LineChart, BarChart, CenterHeader, TransformCategory, PlanList, ActivateUser, RealtimeOrder, ScheduleView, OrderMap },
   setup () {
     // 页面配置
     const options = reactive({
