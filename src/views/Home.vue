@@ -56,7 +56,9 @@
               <div class="right-left2">
                 <TransformCategory :data="category2" :handler="handler"/>
               </div>
-              <div class="right-left3"></div>
+              <div class="right-left3">
+                <RealtimeOrder :data="realTimeOrder" />
+              </div>
               <div class="right-left4"></div>
             </div>
             <div class="right-right">
@@ -88,10 +90,11 @@ import CenterHeader from '@/components/CenterHeader'
 import TransformCategory from '@/components/TransformCategory'
 import PlanList from '@/components/PlanList'
 import ActivateUser from '@/components/ActivateUser'
+import RealtimeOrder from '@/components/RealtimeOrder'
 
 export default {
   name: 'Home',
-  components: { TopHeader, TotalUser, AverageAge, TotalDevice, TotalGender, LineChart, BarChart, CenterHeader, TransformCategory, PlanList, ActivateUser },
+  components: { TopHeader, TotalUser, AverageAge, TotalDevice, TotalGender, LineChart, BarChart, CenterHeader, TransformCategory, PlanList, ActivateUser, RealtimeOrder },
   setup () {
     // 页面配置
     const options = reactive({
@@ -100,7 +103,7 @@ export default {
     })
     // 页面数据 - 业务逻辑和组件代码分离
     const context = getCurrentInstance().ctx
-    const { ready, mapData, userData, ageData, deviceData } = screenData(context, { once: false })
+    const { ready, mapData, userData, ageData, deviceData, realTimeOrder } = screenData(context, { once: false })
 
     const category1 = [
       {
@@ -153,6 +156,7 @@ export default {
       userData,
       ageData,
       deviceData,
+      realTimeOrder,
       category1,
       category2,
       handler

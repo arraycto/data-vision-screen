@@ -7,6 +7,7 @@ export default function (context, { once }) {
   const userData = ref({}) // 其他数据
   const ageData = ref([]) // 年龄数据
   const deviceData = ref({})
+  const realTimeOrder = ref({ date: [], data: [] })
   let task // 间隔请求数据任务
 
   onMounted(() => {
@@ -58,6 +59,16 @@ export default function (context, { once }) {
       totalDevices: userData.value.totalDevices,
       devices: userData.value.devices
     }
+    // 处理 realTimeOrder
+    realTimeOrder.value = {
+      date: [...realTimeOrder.value.date, getNowTime()],
+      data: [...realTimeOrder.value.data, userData.value.realTimeOrder]
+    }
+  }
+
+  const getNowTime = () => {
+    const now = new Date()
+    return `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`
   }
 
   return {
@@ -65,6 +76,7 @@ export default function (context, { once }) {
     mapData,
     userData,
     ageData,
-    deviceData
+    deviceData,
+    realTimeOrder
   }
 }
