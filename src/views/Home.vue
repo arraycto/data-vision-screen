@@ -59,7 +59,9 @@
               <div class="right-left3">
                 <RealtimeOrder :data="realTimeOrder" />
               </div>
-              <div class="right-left4"></div>
+              <div class="right-left4">
+                <ScheduleView />
+              </div>
             </div>
             <div class="right-right">
               <div class="right-right1">
@@ -91,10 +93,11 @@ import TransformCategory from '@/components/TransformCategory'
 import PlanList from '@/components/PlanList'
 import ActivateUser from '@/components/ActivateUser'
 import RealtimeOrder from '@/components/RealtimeOrder'
+import ScheduleView from '@/components/ScheduleView'
 
 export default {
   name: 'Home',
-  components: { TopHeader, TotalUser, AverageAge, TotalDevice, TotalGender, LineChart, BarChart, CenterHeader, TransformCategory, PlanList, ActivateUser, RealtimeOrder },
+  components: { TopHeader, TotalUser, AverageAge, TotalDevice, TotalGender, LineChart, BarChart, CenterHeader, TransformCategory, PlanList, ActivateUser, RealtimeOrder, ScheduleView },
   setup () {
     // 页面配置
     const options = reactive({
@@ -103,7 +106,7 @@ export default {
     })
     // 页面数据 - 业务逻辑和组件代码分离
     const context = getCurrentInstance().ctx
-    const { ready, mapData, userData, ageData, deviceData, realTimeOrder } = screenData(context, { once: false })
+    const { ready, mapData, userData, ageData, deviceData, realTimeOrder, scheduleViewData } = screenData(context, { once: false })
 
     const category1 = [
       {
@@ -157,6 +160,7 @@ export default {
       ageData,
       deviceData,
       realTimeOrder,
+      scheduleViewData,
       category1,
       category2,
       handler
@@ -299,7 +303,7 @@ export default {
 
             .right-right2 {
               width: 100%;
-              height: 650px;
+              height: 670px;
               margin-top: 20px;
             }
           }
