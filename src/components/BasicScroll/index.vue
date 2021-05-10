@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
 import assign from 'loadsh/assign'
 import cloneDeep from 'loadsh/cloneDeep'
@@ -239,6 +239,10 @@ export default {
     const sleep = (duration) => {
       return new Promise(resolve => setTimeout(resolve, duration))
     }
+
+    onMounted(() => {
+      updateData()
+    })
 
     watch(() => props.config, () => {
       updateData()
