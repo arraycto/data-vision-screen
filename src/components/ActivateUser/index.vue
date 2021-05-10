@@ -2,7 +2,7 @@
   <div class="activate-user">
     <div class="title">地区商家销售排行</div>
     <div class="list-wrapper">
-      <div class="list-inner" v-for="(item,index) in currentData" :key="index">
+      <div class="list-inner" v-for="(item,index) in currentData" :key="`${index}-${item.title}`">
         <div class="list-title">{{item.title}}</div>
         <div class="list-separator-wrapper">
           <div class="list-separator" />
@@ -61,7 +61,7 @@ export default {
       if (currentIndex >= allData.value.length - step) {
         currentIndex = 0
       } else {
-        currentIndex++
+        currentIndex += step
       }
     }
 

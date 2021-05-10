@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
 import assign from 'loadsh/assign'
 import cloneDeep from 'loadsh/cloneDeep'
@@ -123,6 +123,7 @@ export default {
     const actualAligns = ref([])
     const rowBg = ref([])
     const currentIndex = ref(0)
+    const isAnimationStart = ref(true)
     let avgHeight
     /**
      * 方法
@@ -207,6 +208,9 @@ export default {
     }
     // 开始动画
     const startAnimation = async () => {
+      if (!isAnimationStart.value) {
+        return
+      }
       const config = actualConfig.value
       const { rowNum, moveNum, duration } = config
       const totalNum = actualRowData.value.length
@@ -235,6 +239,10 @@ export default {
       await sleep(duration - waitTime)
       await startAnimation()
     }
+    // 结束动画
+    const stopAnimation = () => {
+      isAnimationStart.value = false
+    }
 
     const sleep = (duration) => {
       return new Promise(resolve => setTimeout(resolve, duration))
@@ -242,6 +250,10 @@ export default {
 
     onMounted(() => {
       updateData()
+    })
+
+    onUnmounted(() => {
+      stopAnimation()
     })
 
     watch(() => props.config, () => {
